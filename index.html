@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinh Hy Đường</title>
+    
+    <!-- BẮT ĐẦU PHẦN HIỂN THỊ THUMBNAIL & ICON KHI SHARE LINK -->
+    <meta property="og:image" content="https://i.pinimg.com/736x/47/39/80/4739805d0e58d2917b55ceda5971bf36.jpg">
+    <meta property="og:title" content="Vinh Hy Đường">
+    <meta property="og:description" content="Tổng hợp các plot của con trai nhà Lý Nam">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://i.pinimg.com/736x/47/39/80/4739805d0e58d2917b55ceda5971bf36.jpg">
+    <!-- ICON CỦA TAB TRÌNH DUYỆT (FAVICON) -->
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/736x/47/39/80/4739805d0e58d2917b55ceda5971bf36.jpg">
+    <!-- KẾT THÚC PHẦN HIỂN THỊ -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================= CƠ BẢN ================= */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://i.pinimg.com/736x/a4/1d/26/a41d26ee308869540523c0bd0bb7ad51.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            background-color: #1d1d1d; color: #fff; line-height: 1.6;
+        }
+
+        /* ================= HIỆU ỨNG CHUYỂN TRANG MƯỢT (SPA) ================= */
+        .page-section {
+            display: none; 
+            animation: fadeIn 0.5s ease-in-out; 
+        }
+        
+        .page-section.active-page {
+            display: block; 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ================= MENU ĐIỀU HƯỚNG ================= */
+        .top-nav {
+            display: flex; justify-content: center; gap: 20px; padding: 15px;
+            background-color: rgba(0,0,0,0.6); border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 40px; backdrop-filter: blur(5px);
+        }
+
+        .top-nav a {
+            color: #fff; text-decoration: none; font-family: 'Playfair Display', serif;
+            font-size: 1.2rem; padding: 8px 20px; border-radius: 20px;
+            border: 1px solid transparent; transition: 0.3s;
+        }
+
+        .top-nav a:hover, .top-nav a.active-nav {
+            background-color: #fff; color: #000; box-shadow: 0 0 15px rgba(255,255,255,0.8);
+        }
+
+        /* ================= TRANG TÁC GIẢ ================= */
+        .author-container {
+            display: flex; justify-content: center; align-items: center;
+            padding: 20px; min-height: 70vh; padding-bottom: 50px;
+        }
+
+        .author-card {
+            background-color: rgba(15, 15, 15, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px; padding: 40px; text-align: left; 
+            max-width: 650px; width: 100%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .author-card:hover {
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .author-header { text-align: center; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+        .author-avatar { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 0 15px rgba(255,255,255,0.5); margin-bottom: 15px; }
+        .author-name { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 5px; color: #fff; letter-spacing: 2px; }
+        .author-title { color: #aaa; font-size: 1rem; font-style: italic; }
+        
+        .bio-intro { margin-bottom: 20px; font-size: 1rem; color: #ddd; text-align: center; }
+        .bio-intro a { color: #ffffff; text-decoration: underline; text-underline-offset: 3px; transition: 0.3s;}
+        .bio-intro a:hover { color: #cccccc; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #fff; margin-top: 25px; margin-bottom: 10px; letter-spacing: 1px; }
+        .bio-list { list-style: none; color: #ddd; font-size: 0.95rem; line-height: 1.8; }
+        .bio-list li { margin-bottom: 8px; padding-left: 25px; position: relative; }
+        .bio-list li::before { content: "➥"; position: absolute; left: 0; color: #fff; }
+        .bio-list a { color: #fff; text-decoration: underline; text-underline-offset: 3px; transition: 0.3s; }
+        .bio-list a:hover { color: #cccccc; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
+
+        /* ================= TRANG CHỌN CHAR (THẺ TRUYỆN) ================= */
+        header { text-align: center; margin-bottom: 30px; }
+        h1 { font-family: 'Playfair Display', serif; color: #bcbcbc; font-size: 2.8rem; margin-bottom: 15px; font-weight: 550; letter-spacing: 2px; text-shadow: 2px 2px 5px #000; }
+        .subtitle { color: #ddd; font-style: italic; font-size: 1rem; margin-bottom: 30px; text-shadow: 1px 1px 3px #000; }
+
+        .filter-menu { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+        .filter-btn { background-color: rgba(255,255,255,0.9); border: 1px solid #ddd; padding: 8px 16px; cursor: pointer; border-radius: 20px; font-weight: bold; color: #555; transition: 0.3s; }
+        .filter-btn:hover, .filter-btn.active { background-color: #ffffff; color: #000000; border-color: #ffffff; box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+
+        .plot-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding-bottom: 50px; }
+        .plot-card { background-color: rgba(15, 15, 15, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; overflow: hidden; transition: all 0.3s ease-in-out; display: flex; flex-direction: column; cursor: pointer; }
+        .plot-card:hover { transform: translateY(-5px); border-color: rgba(255, 255, 255, 0.9); box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.3); }
+        .plot-card img { width: 100%; height: 250px; object-fit: cover; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .plot-info { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
+        .plot-info h3 { font-size: 1.3rem; margin-bottom: 5px; color: #ffffff; }
+        .plot-tags { font-size: 0.85rem; color: #aaaaaa; margin-bottom: 10px; font-style: italic; }
+        .plot-desc { font-size: 0.95rem; color: #e5e5e5; flex-grow: 1; line-height: 1.6; white-space: pre-line; }
+        .plot-link { text-decoration: none; color: inherit; display: block; height: 100%; }
+        
+        .plot-actions { display: flex; gap: 10px; margin-top: 15px; }
+        .action-btn { flex: 1; text-align: center; padding: 8px 5px; border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 5px; color: #ffffff; text-decoration: none; font-size: 0.9rem; font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: all 0.3s ease; background: transparent; }
+        .action-btn:hover { background-color: #ffffff; color: #000000; box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
+
+        /* HIỆU ỨNG TÓM TẮT TRUYỆN (OVERLAY) */
+        .img-wrapper { position: relative; width: 100%; height: 270px; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.15); }
+        .img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .plot-card:hover .img-wrapper img { transform: scale(1.08); }
+        .plot-summary { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(4px); color: #e5e5e5; padding: 20px; font-size: 0.95rem; line-height: 1.6; text-align: justify; display: flex; align-items: center; opacity: 0; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .plot-card:hover .plot-summary { opacity: 1; transform: translateY(0); }
+
+        /* ================= TRANG GALLERY (PADLET) ================= */
+        .gallery-container { max-width: 1000px; margin: 0 auto; padding: 20px; padding-bottom: 50px; }
+        .padlet-wrapper { background-color: rgba(15, 15, 15, 0.85); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 15px; padding: 10px; box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); transition: 0.3s; }
+        .padlet-wrapper:hover { border-color: rgba(255, 255, 255, 0.8); box-shadow: 0 0 30px rgba(255, 255, 255, 0.5); }
+        .padlet-wrapper iframe { width: 100% !important; height: 700px !important; border-radius: 10px; border: none; }
+
+        /* ================= CỤM ĐIỀU KHIỂN NHẠC ================= */
+        .music-controls { position: fixed; bottom: 20px; left: 20px; display: flex; align-items: center; gap: 12px; z-index: 1000; }
+        .music-btn { border-radius: 50%; background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); color: white; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); }
+        .music-btn:hover { transform: scale(1.15); background: rgba(255, 255, 255, 0.15); box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+        .main-btn { width: 55px; height: 55px; font-size: 22px; }
+        .mini-btn { width: 38px; height: 38px; font-size: 14px; opacity: 0.7; }
+        .mini-btn:hover { opacity: 1; }
+        .main-btn.playing { border-color: #00f2fe; box-shadow: 0 0 20px rgba(0, 242, 254, 0.8); animation: pulse 2s infinite; }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); }
+            50% { transform: scale(1.08); box-shadow: 0 0 25px rgba(0, 242, 254, 1); }
+            100% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= MENU ĐIỀU HƯỚNG CHUNG ================= -->
+    <nav class="top-nav">
+        <!-- Thay vì nhảy link mới, giờ chúng ta gọi hàm Javascript chuyển giao diện mượt mà -->
+        <a href="javascript:void(0)" onclick="chuyenTrang('page-tac-gia', this)" class="active-nav">Tác giả</a>
+        <a href="javascript:void(0)" onclick="chuyenTrang('page-chon-char', this)">Chọn Char</a>
+        <a href="javascript:void(0)" onclick="chuyenTrang('page-gallery', this)">Gallery</a>
+    </nav>
+
+
+    <!-- ================= PAGE 1: THÔNG TIN TÁC GIẢ ================= -->
+    <section id="page-tac-gia" class="page-section active-page">
+        <main class="author-container">
+            <div class="author-card">
+                <div class="author-header">
+                    <img src="https://avatars.fastly.steamstatic.com/7c34c5a5f0e90dbde1ed27674ac5c45d9f173bb1_full.jpg" alt="Lý Nam Avatar" class="author-avatar">
+                    <h1 class="author-name">Lý Nam.</h1>
+                    <p class="author-title">Writer, Chatbot Creator<br>(only on Dokichat & Google AI Studio)</p>
+                </div>
+                <div class="bio-intro">
+                    <p>Gửi gắm tâm tư về char và mình: <a href="https://ngl.link/lynam43430" target="_blank">https://ngl.link/lynam43430</a></p>
+                </div>
+                <h3 class="section-title">𝐖𝐑𝐈𝐓𝐈𝐍𝐆 𝐂𝐎𝐌𝐌𝐈𝐒𝐒𝐈𝐎𝐍</h3>
+                <ul class="bio-list">
+                    <li>Writing commission: <a href="https://lynam.carrd.co/" target="_blank">https://lynam.carrd.co/</a></li>
+                    <li>Sample: <a href="https://ko-fi.com/lynam" target="_blank">https://ko-fi.com/lynam</a></li>
+                    <li>Donate & support mình tại: <a href="https://ko-fi.com/lynam" target="_blank">Ko-fi</a> hoặc ib mình gửi QR.</li>
+                </ul>
+                <h3 class="section-title">𝐀𝐁𝐎𝐔𝐓 𝐌𝐘 𝐎𝐂/𝐂𝐇𝐀𝐓𝐁𝐎𝐓</h3>
+                <ul class="bio-list">
+                    <li>Romance, Angst, Fantasy, Fluff</li>
+                    <li>BL (chủ yếu), BG</li>
+                    <li>Một vài bé có vấn đề thần kinh, là blackflag, có kink và fetish nặng đô. Không hợp xin đừng nói lời cay đắng.</li>
+                    <li>Đọc thêm về các bé tại: <a href="https://www.dokichat.club/en/user/a57e1481-ad2a-4f73-9f70-0cf24d426c5e" target="_blank">Dokichat</a></li>
+                </ul>
+            </div>
+        </main>
+    </section>
+
+
+    <!-- ================= PAGE 2: CHỌN CHAR ================= -->
+    <section id="page-chon-char" class="page-section">
+        <header>
+            <h1>Tự tình dưới hoa</h1>
+            <nav class="filter-menu">
+                <button class="filter-btn active" data-filter="tat-ca">Tất cả</button>
+                <button class="filter-btn" data-filter="c4">C4 series</button>
+                <button class="filter-btn" data-filter="black-flag">Blackflag</button>
+                <button class="filter-btn" data-filter="non-human">Non-human</button>
+                <button class="filter-btn" data-filter="em-be">Em bé</button>
+                <button class="filter-btn" data-filter="hoang-de">Hoàng đế</button>
+                <button class="filter-btn" data-filter="tup">Thiên Uyên Phái</button>
+                <button class="filter-btn" data-filter="sdhs">SDHS</button>
+            </nav>
+        </header>
+
+        <main class="plot-container">
+            <article class="plot-card" data-category="c4">
+                <img src="https://i.pinimg.com/736x/c3/92/fd/c392fd3752e04f9cb1341efc808867f7.jpg" alt="Yori">
+                <div class="plot-info">
+                    <h3>Kujo Yori</h3>
+                    <p class="plot-tags">#txvt #tình đầu #c4 #BG/BL</p>
+                    <p class="plot-desc">Trăm năm mấy lúc giật mình. Mười năm vô tận mang tình tự đi.</p>
+                    <div class="plot-actions">
+                        <a href="https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221Di-bY7iDDeeId5BEZDSThFRqM5FnSCOI%22%5D,%22action%22:%22open%22,%22userId%22:%22103281398063950986380%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing" target="_blank" class="action-btn">BL</a>
+                        <a href="https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221siUCtND6SKJF3on5GE45htye1L-lS2i1%22%5D,%22action%22:%22open%22,%22userId%22:%22103281398063950986380%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing" target="_blank" class="action-btn">BG</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="plot-card" data-category="c4">
+                <a href="https://aistudio.google.com/app/prompts/1G8DtvR_zfQ9ufmouxSgaynObUNpTeBi4" target="_blank" class="plot-link">
+                    <img src="https://i.pinimg.com/736x/05/a2/15/05a2157a3f9935807e052611dfb0d51c.jpg" alt="Reo">
+                    <div class="plot-info">
+                        <h3>Saionji Reo</h3>
+                        <p class="plot-tags">#trà đạo #angst #redflag #c4 #BG/BL</p>
+                        <p class="plot-desc">"Thoáng hiện em về trong đáy cốc 
+                        Nói cười như chuyện một đêm mơ"</p>
+                    </div>
+                </a>
+            </article>
+
+            <article class="plot-card" data-category="c4">
+                <img src="https://i.pinimg.com/736x/f8/55/b1/f855b18c16590a287ac1d1949b1a29c9.jpg" alt="Shin">
+                <div class="plot-info">
+                    <h3>Kuroda Shin</h3>
+                    <p class="plot-tags">#txvt #secret lover #c4 #BG/BL</p>
+                    <p class="plot-desc">Yêu không công khai thì đòi hỏi cái gì?</p>
+                    <div class="plot-actions">
+                        <a href="https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%2217ATWUHDwOaWOQilbgIq0KYB10WtLyM8o%22%5D,%22action%22:%22open%22,%22userId%22:%22103281398063950986380%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing" target="_blank" class="action-btn">BL</a>
+                        <a href="https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221LYf5Gb_2Wgk8HO-jeH-qJASeTr9hVrYG%22%5D,%22action%22:%22open%22,%22userId%22:%22103281398063950986380%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing" target="_blank" class="action-btn">BG</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="plot-card" data-category="c4">
+                <img src="https://i.pinimg.com/736x/3d/5a/4d/3d5a4d1f670b7e77db6fd054daf19ab5.jpg" alt="Takeru">
+                <div class="plot-info">
+                    <h3>Mido Takeru</h3>
+                    <p class="plot-tags">#txvt #hài hước #c4 #BG/BL</p>
+                    <p class="plot-desc">Con mẹ nó, mày dám lừa tao hả?</p>
+                    <div class="plot-actions">
+                        <a href="https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%2215TPBFNq7Z-LlxlGG33iZ6Z2neMrS6UYC%22%5D,%22action%22:%22open%22,%22userId%22:%22100846187941387054971%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing" target="_blank" class="action-btn">BL</a>
+                        <a href="https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221v_jeeUcuYigavvsZEwqoQvzDHCiJeCHY%22%5D,%22action%22:%22open%22,%22userId%22:%22103281398063950986380%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing" target="_blank" class="action-btn">BG</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Keith -->
+            <article class="plot-card" data-category="black-flag">
+                <a href="javascript:void(0)" onclick="moLinkBaoMat('saionji riku&saionji ren')" class="plot-link">
+                    <img src="https://i.pinimg.com/736x/51/6c/3f/516c3f9ca0326f1c808eeb74c9a3e1bf.jpg" alt="Keith">
+                    <div class="plot-info">
+                        <h3>Keith Harrington</h3>
+                        <p class="plot-tags">#BDSM #diễn viên #máu M #BL</p>
+                        <p class="plot-desc">Ảnh đế máu M x Tuyển thủ quyền anh kiêm diễn viên tuyến 18
+						[KHÓA LINK VĨNH VIỄN]</p>
+                    </div>
+                </a>
+            </article>
+            
+            <!-- Sylvain -->
+            <article class="plot-card" data-category="black-flag">
+                <a href="javascript:void(0)" onclick="moLinkBaoMat('saionji riku&saionji ren')" class="plot-link">
+                    <img src="https://i.pinimg.com/736x/17/ce/79/17ce79633e78a53d1cbb205df2de22b7.jpg" alt="Sylvain">
+                    <div class="plot-info">
+                        <h3>Sylvain Delacroix</h3>
+                        <p class="plot-tags">#BDSM #trả thù #toxic love #BL</p>
+                        <p class="plot-desc">Khôn hồn thì dạng háng ra.
+						[KHÓA LINK VĨNH VIỄN]</p>
+                    </div>
+                </a>
+            </article>
+            
+            <!-- LTT -->
+            <article class="plot-card" data-category="non-human">
+                <a href="https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221TUcqdad5GIVg0zF1THahpCeTXvrFdsYu%22%5D,%22action%22:%22open%22,%22userId%22:%22105225959951345562678%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing" target="_blank" class="plot-link">
+                    <img src="https://i.pinimg.com/736x/16/88/a2/1688a2b8ff2238f617c2d6b60808d1ff.jpg" alt="LTT">
+                    <div class="plot-info">
+                        <h3>Lương Thính Tuyết</h3>
+                        <p class="plot-tags">#hậu tận thế #người cá x thợ săn #BL</p>
+                        <p class="plot-desc">Phải biết nó là thứ gì trước đã, lúc ấy xử tên này cũng chưa muộn.</p>
+                    </div>
+                </a>
+            </article>
+            
+            <article class="plot-card" data-category="non-human">
+                <img src="https://i.pinimg.com/736x/76/36/52/763652e836a420843435c8921417e810.jpg" alt="Genji">
+                <div class="plot-info">
+                    <h3>Daisuke Genji</h3>
+                    <p class="plot-tags">#hồ ly x chủ tiệm tâm linh #Nhật Bản #linh dị #hiện đại #BG/BL</p>
+                    <p class="plot-desc">Sao rồi, còn nhớ khế ước giữa chúng ta năm đó chứ?</p>
+                    <div class="plot-actions">
+                        <a href="https://aistudio.google.com/app/prompts/17boAZfITzwz2a91cWYwfgiPm_k6Gy7Hy" target="_blank" class="action-btn">BL</a>
+                        <a href="https://aistudio.google.com/app/prompts/1HTwdP30lWGi1SlAZ6Id8zBVJ2wKWAiEz" target="_blank" class="action-btn">BG</a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Fadey (2Nga) -->
+            <article class="plot-card" data-category="black-flag">
+                <a href="javascript:void(0)" onclick="moLinkBaoMat('saionji riku&saionji ren')" class="plot-link">
+                    <img src="https://i.pinimg.com/736x/da/2f/08/da2f084a30fd14218019d51cf94df6fb.jpg" alt="2Nga">
+                    <div class="plot-info">
+                        <h3> Mstislav Gornostayev & Fadey Gornostayev</h3>
+                        <p class="plot-tags">#BDSM #ABO #3P #dark romance #BL</p>
+                        <p class="plot-desc">Chơi trốn tìm đủ rồi. Giờ thì về nhà nào, Моё сокровище (báu vật của ta).
+						[KHÓA LINK VĨNH VIỄN]</p>
+                    </div>
+                </a>
+            </article>
+            
+            <article class="plot-card" data-category="em-be">
+                <a href="https://aistudio.google.com/app/prompts/15jv1Ij5tTP99eMAqI0rPjj1kmVnpqMJN" target="_blank" class="plot-link">
+                    <img src="https://i.pinimg.com/736x/77/16/28/771628442732e74034b03e51a673b87b.jpg" alt="Augustin">
+                    <div class="plot-info">
+                        <h3>Augustin DuPont</h3>
+                        <p class="plot-tags">#Txvt #gà bông #Pháp x Việt #bạn qua thư #BG/BL</p>
+                        <p class="plot-desc">Chào cậu, tác giả bí ẩn của tớ!</p>
+                    </div>
+                </a>
+            </article>
+            
+            <article class="plot-card" data-category="em-be">
+                <a href="https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221tgifVi3lrLwN1sUFaEwcmA5OTC3xUR8N%22%5D,%22action%22:%22open%22,%22userId%22:%22103281398063950986380%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing" target="_blank" class="plot-link">
+                    <img src="https://i.pinimg.com/736x/a4/9c/eb/a49cebee5d5ca05d6da9770a506b2d41.jpg" alt="Aiden">
+                    <div class="plot-info">
+                        <h3>Aiden Seo</h3>
+                        <p class="plot-tags">#idol #showbiz #niên hạ #BL</p>
+                        <p class="plot-desc">Tôi chưa bao giờ nói rằng mình tha thứ cho anh.</p>
+                    </div>
+                </a>
+            </article>
+            
+            <article class="plot-card" data-category="hoang-de">
+                <a href="https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221_cuXQ2OJnq4hueLalgVOw3YRj1qr5s3h%22%5D,%22action%22:%22open%22,%22userId%22:%22103281398063950986380%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing" target="_blank" class="plot-link">
+                    <img src="https://i.pinimg.com/736x/2c/64/f5/2c64f5b8f34bcf742dcbf0a8f20d8fc9.jpg" alt="TTN">
+                    <div class="plot-info">
+                        <h3>Triệu Tư Nguyên</h3>
+                        <p class="plot-tags">#xuyên không #cổ trang #hài hước #hồn nam xác nữ</p>
+                        <p class="plot-desc">Tôi muốn xuyên không thành Hoàng đế, không phải Hoàng hậu!</p>
+                    </div>
+                </a>
+            </article>
+            
+            <article class="plot-card" data-category="tup">
+                <a href="https://aistudio.google.com/app/prompts/1oWUKErU8EoPGlIbL70PkHR1NBrj_t0sP" target="_blank" class="plot-link">
+                    <img src="https://i.pinimg.com/736x/5a/08/ad/5a08ad5d292573e651435e45be35cdf1.jpg" alt="ÂL">
+                    <div class="plot-info">
+                        <h3>Ân Long</h3>
+                        <p class="plot-tags">#cổ trang #niên hạ #kiếm hiệp #hành động #yandere #BL</p>
+                        <p class="plot-desc">Thế gian này chỉ có hai loại người: một là ca ca, hai là súc sinh</p>
+                    </div>
+                </a>
+            </article>
+            
+            <article class="plot-card" data-category="sdhs">
+                <a href="https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%2217K611mVQ8a9UNtNqN6qoh_q_osL5Tl8V%22%5D,%22action%22:%22open%22,%22userId%22:%22103281398063950986380%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing" target="_blank" class="plot-link">
+                    <img src="https://i.pinimg.com/736x/62/30/a0/6230a01ef014d9734da8b7519e0b58e7.jpg" alt="CTJ">
+                    <div class="plot-info">
+                        <h3>Cheon Tae Jeong</h3>
+                        <p class="plot-tags">#hài hước #oan gia ngõ hẹp #họa sĩ webtoon x trợ lý #slowburn #BG/BL</p>
+                        <p class="plot-desc">Thì ra là mày!</p>
+                    </div>
+                </a>
+            </article>
+			
+			<article class="plot-card" data-category="em-be">
+                <a href="https://aistudio.google.com/app/prompts/11aTf3bLPWutPpbm-XPVDCvwBIpBtMdOT" target="_blank" class="plot-link">
+                    <img src="https://i.pinimg.com/736x/75/fe/cb/75fecbc98865af25519d44a990dd0aab.jpg" alt="NTT">
+                    <div class="plot-info">
+                        <h3>Ninh Tử Thiện</h3>
+                        <p class="plot-tags">#chó điên x cháu nuôi tâm cơ #EABO #hắc bang #age gap #BL</p>
+                        <p class="plot-desc">"Chú hôm nay ở nhà với cháu được không?"</p>
+                    </div>
+                </a>
+            </article>
+        </main>
+    </section>
+
+
+    <!-- ================= PAGE 3: GALLERY PADLET ================= -->
+    <section id="page-gallery" class="page-section">
+        <header>
+            <h1>Tàng Thư Các</h1>
+            <p class="subtitle">Nơi lưu giữ fanart về các bé. Bấm dấu (+) để đóng góp nhé!</p>
+        </header>
+
+        <main class="gallery-container">
+            <div class="padlet-wrapper">
+                <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4">
+                    <p style="padding:0;margin:0">
+                        <iframe src="https://padlet.com/embed/fasoz3xadc2at59s" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe>
+                    </p>
+                </div>
+            </div>
+        </main>
+    </section>
+
+
+    <!-- ================= HỆ THỐNG PLAYLIST NHẠC NỀN ================= -->
+    <!-- Nhạc nằm ngoài các Page nên sẽ không bao giờ bị tắt khi bấm menu -->
+    <audio id="bg-music"></audio>
+
+    <div class="music-controls">
+        <button id="prev-btn" class="music-btn mini-btn" title="Lùi bài">⏮</button>
+        <button id="music-toggle" class="music-btn main-btn" title="Bật/Tắt nhạc">🎵</button>
+        <button id="next-btn" class="music-btn mini-btn" title="Bài tiếp theo">⏭</button>
+    </div>
+
+    <!-- ================= KỊCH BẢN JAVASCRIPT TỔNG HỢP ================= -->
+    <script>
+        // --- 1. XỬ LÝ CHUYỂN TRANG MƯỢT MÀ (SPA) ---
+        function chuyenTrang(idTrang, nutBam) {
+            // Ẩn tất cả các trang
+            document.querySelectorAll('.page-section').forEach(trang => {
+                trang.classList.remove('active-page');
+            });
+            // Hủy sáng tất cả các nút
+            document.querySelectorAll('.top-nav a').forEach(nut => {
+                nut.classList.remove('active-nav');
+            });
+            // Hiển thị trang được chọn và làm sáng nút tương ứng
+            document.getElementById(idTrang).classList.add('active-page');
+            nutBam.classList.add('active-nav');
+        }
+
+        // --- 2. XỬ LÝ MẬT KHẨU TRUYỆN ---
+        function moLinkBaoMat(matKhauDung, linkTruyen) {
+            let nhapPass = prompt("Vui lòng nhập mật khẩu: Gợi ý: Em trai của Saionji Reo tên là gì?");
+            if (nhapPass === null) return; 
+            if (nhapPass === matKhauDung) {
+                window.open(linkTruyen, '_blank'); 
+            } else {
+                alert("Sai mật khẩu rồi! Vui lòng thử lại ❌");
+            }
+        }
+
+        // --- 3. XỬ LÝ LỌC TRUYỆN ---
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const plotCards = document.querySelectorAll('.plot-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                plotCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (filterValue === 'tat-ca' || filterValue === category) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // --- 4. XỬ LÝ PLAYLIST NHẠC NỀN ---
+        const playlist = [
+            "adamn.mp3", 
+            "loi-song.mp3",
+            "doi-tu-the.mp3",
+            "dung-noi-cau-voi-anh.mp3",
+            "obgtlh.mp3",
+            "lai-may-bay.mp3",
+            "choi-do.mp3",
+            "sieu-nhan-ngao.mp3",
+            "breakfast.mp3",
+            "ngua-o.mp3",
+            "khong-phai-gu.mp3",
+            "ha-noi.mp3",
+            "chac-la-say-oi.mp3",
+            "buon-hay-vui.mp3",
+            "cao-oc-20.mp3",
+            "y-chang-em.mp3",
+            "bazovyy-minimum.mp3",
+            "hello-bitches.mp3",			
+            "ngay-mai-em-di.mp3",			
+            "the-one-for-me.mp3"			
+        ];
+        
+        let currentTrack = 0;
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-toggle');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+
+        music.src = playlist[currentTrack];
+
+        function playMusic() {
+            music.play().then(() => {
+                musicBtn.classList.add('playing');
+                musicBtn.innerText = '🎶';
+            }).catch(err => console.log("Trình duyệt chặn autoplay"));
+        }
+
+        function toggleMusic() {
+            if (music.paused) {
+                playMusic();
+            } else {
+                music.pause();
+                musicBtn.classList.remove('playing');
+                musicBtn.innerText = '🎵';
+            }
+        }
+
+        function nextTrack() {
+            currentTrack++;
+            if (currentTrack >= playlist.length) {
+                currentTrack = 0; 
+            }
+            music.src = playlist[currentTrack];
+            playMusic(); 
+        }
+
+        function prevTrack() {
+            currentTrack--;
+            if (currentTrack < 0) {
+                currentTrack = playlist.length - 1; 
+            }
+            music.src = playlist[currentTrack];
+            playMusic();
+        }
+
+        musicBtn.addEventListener('click', toggleMusic);
+        nextBtn.addEventListener('click', nextTrack);
+        prevBtn.addEventListener('click', prevTrack);
+        music.addEventListener('ended', nextTrack);
+
+        document.body.addEventListener('click', function playOnce() {
+            if (music.paused && music.currentTime === 0) {
+                playMusic();
+            }
+            document.body.removeEventListener('click', playOnce);
+        }, { once: true });
+    </script>
+</body>
+</html>
