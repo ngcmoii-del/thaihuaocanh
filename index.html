@@ -148,13 +148,124 @@
             50% { transform: scale(1.08); box-shadow: 0 0 25px rgba(0, 242, 254, 1); }
             100% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); }
         }
+		
+		/* ================= THANH CUỘN (SCROLLBAR) ẢO DIỆU ================= */
+        ::-webkit-scrollbar {
+            width: 8px; /* Thu nhỏ thanh cuộn */
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a; /* Nền đen nhám */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2); /* Kính mờ */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Sáng lên khi trỏ vào */
+        }
+
+        /* ================= MÀN HÌNH CHỜ ĐIỆN ẢNH ================= */
+        #cinematic-loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background-color: #050505; /* Đen tuyền */
+            z-index: 99999; /* Đè lên toàn bộ web */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1.5s ease;
+            cursor: pointer !important;
+        }
+
+        .loader-content {
+            text-align: center;
+            animation: slowFadeIn 2s ease-in-out forwards;
+        }
+
+        .loader-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: #e5e5e5;
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.4); /* Chữ phát sáng mờ */
+        }
+
+        .loader-hint {
+            font-size: 0.85rem;
+            color: #888;
+            letter-spacing: 3px;
+            animation: blinkHint 2s infinite;
+        }
+
+        @keyframes slowFadeIn {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes blinkHint {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; text-shadow: 0 0 10px rgba(255,255,255,0.6); }
+        }
+
+        .loader-hidden {
+            opacity: 0;
+            pointer-events: none; /* Khắc phục lỗi màn hình chờ chặn nhấp chuột */
+        }
+
+        /* ================= CON TRỎ CHUỘT (CHỈ ÁP DỤNG TRÊN MÁY TÍNH) ================= */
+        @media (pointer: fine) {
+            body { cursor: none; } /* Ẩn con trỏ mặc định */
+            a, button, .plot-card, #cinematic-loader { cursor: none !important; }
+            
+            /* Đốm sáng lõi */
+            .cursor-dot {
+                position: fixed; top: 0; left: 0; width: 8px; height: 8px;
+                background-color: white; border-radius: 50%;
+                z-index: 100000; pointer-events: none;
+                transform: translate(-50%, -50%);
+                box-shadow: 0 0 15px rgba(255,255,255,0.9);
+            }
+            
+            /* Vòng tròn lan tỏa bên ngoài */
+            .cursor-outline {
+                position: fixed; top: 0; left: 0; width: 40px; height: 40px;
+                border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 50%;
+                z-index: 99999; pointer-events: none;
+                transform: translate(-50%, -50%);
+                transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+            }
+
+            /* Hiệu ứng khi trỏ chuột vào link hoặc thẻ truyện */
+            .cursor-hover {
+                width: 65px; height: 65px;
+                background-color: rgba(255, 255, 255, 0.05);
+                border-color: rgba(255, 255, 255, 0.8);
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            }
+        }
     </style>
 </head>
 <body>
+<!-- MÀN HÌNH CHỜ ĐIỆN ẢNH -->
+    <div id="cinematic-loader">
+        <div class="loader-content">
+            <p class="loader-quote">
+                "Trăm năm mấy lúc giật mình.<br>
+                Mười năm vô tận mang tình tự đi."
+            </p>
+            <p class="loader-hint">[ CHẠM ĐỂ TIẾN VÀO VINH HY ĐƯỜNG ]</p>
+        </div>
+    </div>
+
+    <!-- CON TRỎ CHUỘT PHÁT SÁNG -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
     <!-- ================= MENU ĐIỀU HƯỚNG CHUNG ================= -->
     <nav class="top-nav">
-        <!-- Thay vì nhảy link mới, giờ chúng ta gọi hàm Javascript chuyển giao diện mượt mà -->
         <a href="javascript:void(0)" onclick="chuyenTrang('page-tac-gia', this)" class="active-nav">Tác giả</a>
         <a href="javascript:void(0)" onclick="chuyenTrang('page-chon-char', this)">Chọn Char</a>
         <a href="javascript:void(0)" onclick="chuyenTrang('page-gallery', this)">Gallery</a>
@@ -166,7 +277,6 @@
         <main class="author-container">
             <div class="author-card">
                 <div class="author-header">
-                    <img src="https://avatars.fastly.steamstatic.com/7c34c5a5f0e90dbde1ed27674ac5c45d9f173bb1_full.jpg" alt="Lý Nam Avatar" class="author-avatar">
                     <h1 class="author-name">Lý Nam.</h1>
                     <p class="author-title">Writer, Chatbot Creator<br>(only on Dokichat & Google AI Studio)</p>
                 </div>
@@ -203,6 +313,7 @@
 				<button class="filter-btn" data-filter="mafia">Mafia</button>
                 <button class="filter-btn" data-filter="hoang-de">Hoàng đế</button>
                 <button class="filter-btn" data-filter="tup">Thiên Uyên Phái</button>
+				<button class="filter-btn" data-filter="vtm">Vô Tức Môn</button>
                 <button class="filter-btn" data-filter="sdhs">SDHS</button>
             </nav>
         </header>
@@ -371,6 +482,18 @@
                     </div>
                 </a>
             </article>
+			
+			<article class="plot-card" data-category="vtm">
+                <a href="https://aistudio.google.com/app/prompts/1q6wZZ8NMBwZ4pLZ16WrJ9ECt-4ohXucj" target="_blank" class="plot-link">
+                    <img src="https://i.pinimg.com/736x/0d/14/fc/0d14fc2c61973ec50dd4b0edebfed909.jpg" alt="KB">
+                    <div class="plot-info">
+                        <h3>Vương Tranh</h3>
+                        <p class="plot-tags">#kiếmhiệp #cổtrang #Ngược(?) #BL</p>
+                        <p class="plot-desc">"Thanh hương bất nhập đồ mi mộng
+						Cửu thập xuân tùy dạ vũ lan."</p>
+                    </div>
+                </a>
+            </article>
         </main>
     </section>
 
@@ -395,7 +518,6 @@
 
 
     <!-- ================= HỆ THỐNG PLAYLIST NHẠC NỀN ================= -->
-    <!-- Nhạc nằm ngoài các Page nên sẽ không bao giờ bị tắt khi bấm menu -->
     <audio id="bg-music"></audio>
 
     <div class="music-controls">
@@ -408,15 +530,12 @@
     <script>
         // --- 1. XỬ LÝ CHUYỂN TRANG MƯỢT MÀ (SPA) ---
         function chuyenTrang(idTrang, nutBam) {
-            // Ẩn tất cả các trang
             document.querySelectorAll('.page-section').forEach(trang => {
                 trang.classList.remove('active-page');
             });
-            // Hủy sáng tất cả các nút
             document.querySelectorAll('.top-nav a').forEach(nut => {
                 nut.classList.remove('active-nav');
             });
-            // Hiển thị trang được chọn và làm sáng nút tương ứng
             document.getElementById(idTrang).classList.add('active-page');
             nutBam.classList.add('active-nav');
         }
@@ -478,6 +597,24 @@
             "the-one-for-me.mp3"			
         ];
         
+        // --- HÀM TRỘN MẢNG (Fisher-Yates Shuffle) ---
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                
+                [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]
+                ];
+            }
+            return array;
+        }
+
+        // Đảo lộn danh sách bài hát ngay lúc khách mới vào web
+        shuffle(playlist);
+
         let currentTrack = 0;
         const music = document.getElementById('bg-music');
         const musicBtn = document.getElementById('music-toggle');
@@ -526,12 +663,43 @@
         prevBtn.addEventListener('click', prevTrack);
         music.addEventListener('ended', nextTrack);
 
-        document.body.addEventListener('click', function playOnce() {
+        // ================= XỬ LÝ MÀN HÌNH CHỜ & BẬT NHẠC =================
+        const loader = document.getElementById('cinematic-loader');
+        
+        loader.addEventListener('click', function() {
+            // 1. Kéo bức màn đen lên (ẩn đi hoàn toàn để không chặn nhấp chuột)
+            loader.classList.add('loader-hidden');
+            
+            // 2. Tự động bật nhạc khi khách chạm vào
             if (music.paused && music.currentTime === 0) {
                 playMusic();
             }
-            document.body.removeEventListener('click', playOnce);
-        }, { once: true });
+        });
+
+        // ================= XỬ LÝ CON TRỎ CHUỘT (Dành cho máy tính) =================
+        if (window.matchMedia("(pointer: fine)").matches) {
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+
+            window.addEventListener('mousemove', function(e) {
+                const posX = e.clientX;
+                const posY = e.clientY;
+
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 400, fill: "forwards" });
+            });
+
+            const interactables = document.querySelectorAll('a, button, .plot-card');
+            interactables.forEach(el => {
+                el.addEventListener('mouseenter', () => cursorOutline.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => cursorOutline.classList.remove('cursor-hover'));
+            });
+        }
     </script>
 </body>
 </html>
